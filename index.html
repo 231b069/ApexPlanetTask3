@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced JS Project</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+    background: #f4f4f4;
+  }
+
+  header {
+    background: #333;
+    color: white;
+    padding: 15px;
+  }
+
+  section {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+  }
+
+  img {
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+  }
+
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    background: #333;
+    color: white;
+    border-radius: 5px;
+  }
+
+  button:hover {
+    background: #555;
+  }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 600px) {
+    body {
+      font-size: 14px;
+    }
+    img {
+      width: 95%;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1024px) {
+    body {
+      font-size: 16px;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Advanced JS Project</h1>
+</header>
+
+<!-- IMAGE CAROUSEL -->
+<section>
+  <h2>Image Carousel</h2>
+
+  <img id="img" src="https://picsum.photos/400/250?random=1">
+
+  <div>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+  </div>
+</section>
+
+<!-- API SECTION -->
+<section>
+  <h2>Joke Generator 😂</h2>
+
+  <button onclick="getJoke()">Get Joke</button>
+
+  <p id="setup"></p>
+  <p id="punchline"></p>
+</section>
+
+<script>
+  // IMAGE CAROUSEL
+  let index = 1;
+
+  function next() {
+    index++;
+    document.getElementById("img").src =
+      "https://picsum.photos/400/250?random=" + index;
+  }
+
+  function prev() {
+    if (index > 1) index--;
+    document.getElementById("img").src =
+      "https://picsum.photos/400/250?random=" + index;
+  }
+
+  // API FETCH (JOKE)
+  function getJoke() {
+    fetch("https://official-joke-api.appspot.com/random_joke")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("setup").innerText = data.setup;
+        document.getElementById("punchline").innerText = data.punchline;
+      });
+  }
+</script>
+
+</body>
+</html>
